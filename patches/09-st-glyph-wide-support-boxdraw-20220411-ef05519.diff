@@ -46,24 +46,24 @@ index bf6bbf9..1311c0d 100644
 +xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, int y, int dmode)
  {
  	int charlen = len * ((base.mode & ATTR_WIDE) ? 2 : 1);
- 	int winx = borderpx + x * win.cw, winy = borderpx + y * win.ch,
+ 	int winx = win.hborderpx + x * win.cw, winy = win.vborderpx + y * win.ch,
 @@ -1470,51 +1470,45 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  	if (base.mode & ATTR_INVISIBLE)
  		fg = bg;
  
 -	/* Intelligent cleaning up of the borders. */
 -	if (x == 0) {
--		xclear(0, (y == 0)? 0 : winy, borderpx,
+-		xclear(0, (y == 0)? 0 : winy, win.hborderpx,
 -			winy + win.ch +
--			((winy + win.ch >= borderpx + win.th)? win.h : 0));
+-			((winy + win.ch >= win.vborderpx + win.th)? win.h : 0));
 -	}
--	if (winx + width >= borderpx + win.tw) {
+-	if (winx + width >= win.hborderpx + win.tw) {
 -		xclear(winx + width, (y == 0)? 0 : winy, win.w,
--			((winy + win.ch >= borderpx + win.th)? win.h : (winy + win.ch)));
+-			((winy + win.ch >= win.vborderpx + win.th)? win.h : (winy + win.ch)));
 -	}
 -	if (y == 0)
--		xclear(winx, 0, winx + width, borderpx);
--	if (winy + win.ch >= borderpx + win.th)
+-		xclear(winx, 0, winx + width, win.vborderpx);
+-	if (winy + win.ch >= win.vborderpx + win.th)
 -		xclear(winx, winy + win.ch, winx + width, win.h);
 -
 -	/* Clean up the region we want to draw to. */
@@ -112,7 +112,7 @@ index bf6bbf9..1311c0d 100644
  
 -	/* Render underline and strikethrough. */
 -	if (base.mode & ATTR_UNDERLINE) {
--		XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent * chscale + 1,
+-		XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent + 1,
 -				width, 1);
 -	}
 +        /* Render underline and strikethrough. */
@@ -122,7 +122,7 @@ index bf6bbf9..1311c0d 100644
 +        }
  
 -	if (base.mode & ATTR_STRUCK) {
--		XftDrawRect(xw.draw, fg, winx, winy + 2 * dc.font.ascent * chscale / 3,
+-		XftDrawRect(xw.draw, fg, winx, winy + 2 * dc.font.ascent / 3,
 -				width, 1);
 -	}
 -
