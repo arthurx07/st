@@ -505,10 +505,10 @@ index 519b9bd..07a7c66 100644
  	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
  };
  
-@@ -113,6 +114,14 @@ char *xstrdup(const char *);
- 
- int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
- 
+@@ -111,6 +114,14 @@ void *xmalloc(size_t);
+ void *xrealloc(void *, size_t);
+ char *xstrdup(const char *);
+
 +int isboxdraw(Rune);
 +ushort boxdrawindex(const Glyph *);
 +#ifdef XFT_VERSION
