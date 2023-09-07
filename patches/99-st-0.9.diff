@@ -1,14 +1,14 @@
-From 4fe62433512dec08d8620b08277624089565e8d6 Mon Sep 17 00:00:00 2001
+From 21cda597848078feed799a3d59c1996aa0cf3e8b Mon Sep 17 00:00:00 2001
 From: kumao <arturleivarx@gmail.com>
-Date: Tue, 5 Sep 2023 18:46:18 +0200
-Subject: [PATCH] custom config.def.h for 0.8.5
+Date: Fri, 8 Sep 2023 01:42:47 +0200
+Subject: [PATCH] custom config.def.h for 0.9
 
 ---
- config.def.h | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ config.def.h | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index e61de24..1618cae 100644
+index e61de24..c4df1ba 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -5,8 +5,8 @@
@@ -22,6 +22,15 @@ index e61de24..1618cae 100644
  
  /*
   * What program is execed by st depends of these precedence rules:
+@@ -73,7 +73,7 @@ static unsigned int cursorthickness = 2;
+  *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
+  * 0: disable (render all U25XX glyphs normally from the font).
+  */
+-const int boxdraw = 0;
++const int boxdraw = 1;
+ const int boxdraw_bold = 0;
+ 
+ /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
 @@ -106,7 +106,7 @@ char *termname = "st-256color";
  unsigned int tabspaces = 8;
  
